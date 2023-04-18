@@ -166,7 +166,6 @@ def train_and_evaluate(args):
     print(args)
 
     if args.use_fp8:
-        assert gpu_has_fp8(), "GPU needs to support FP8."
         args.use_te = True
 
     train_ds, test_ds = get_datasets()

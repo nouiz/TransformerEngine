@@ -259,9 +259,6 @@ def train_and_evaluate(args):
     print(args)
     check_num_gpu(args.num_gpu)
 
-    if args.use_fp8:
-        assert gpu_has_fp8(), "GPU needs to support FP8."
-
     num_gpu_tp = 2
     if args.num_gpu % num_gpu_tp == 0:
         num_gpu_dp = args.num_gpu // num_gpu_tp

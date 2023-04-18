@@ -251,9 +251,6 @@ def train_and_evaluate(args):
     assert args.test_batch_size % args.num_gpu == 0, \
         f"Test batch size needs to be multiple of {args.num_gpu}"
 
-    if args.use_fp8:
-        assert gpu_has_fp8(), "GPU needs to support FP8."
-
     device_mesh = mesh_utils.create_device_mesh((args.num_gpu,))
     with jax.sharding.Mesh(devices=device_mesh, axis_names=(DEVICE_DP_AXIS,)):
 

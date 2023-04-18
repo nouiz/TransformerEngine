@@ -213,9 +213,6 @@ def train_and_evaluate(args):
     os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
     print(args)
 
-    if args.use_fp8:
-        assert gpu_has_fp8(), "GPU needs to support FP8."
-
     rng = jax.random.PRNGKey(args.seed)
     rng, params_rng = jax.random.split(rng)
     rng, dropout_rng = jax.random.split(rng)
