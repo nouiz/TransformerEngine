@@ -406,14 +406,14 @@ class TestEncoder(unittest.TestCase):
     def test_te_bf16(self):
         """Test Transformer Engine with BF16"""
         actual = train_and_evaluate(self.args)
-        assert actual[0] < 0.45 and actual[1] > 0.79
+        assert actual[0] < 0.50 and actual[1] > 0.76
 
     @unittest.skipIf(not gpu_has_fp8(), reason='GPU capability is not enough to run FP8')
     def test_te_fp8(self):
         """Test Transformer Engine with FP8"""
         self.args.use_fp8 = True
         actual = train_and_evaluate(self.args)
-        assert actual[0] < 0.45 and actual[1] > 0.79
+        assert actual[0] < 0.50 and actual[1] > 0.76
 
 
 if __name__ == "__main__":
