@@ -37,6 +37,8 @@ def te_dtype_to_jax_dtype(te_dtype):
         return jnp.bfloat16
     if te_dtype == TEDType.kInt32:
         return jnp.int32
+    if te_dtype == TEDType.kInt64:
+        return jnp.int64
     return jnp.int8
 
 
@@ -1672,7 +1674,7 @@ class ScaledSoftmaxBwdPrimitive(SoftmaxPrimitive):
                                                          grad_outputs, softmax_outputs,
                                                          scale_factor)
 
-        return [out]
+        return out # out is iterable already
 
 
 _scaled_softmax_bwd_p = register_primitive(ScaledSoftmaxBwdPrimitive)
@@ -1821,7 +1823,7 @@ class ScaledMaskedSoftmaxBwdPrimitive(SoftmaxPrimitive):
                                                          grad_outputs, softmax_outputs,
                                                          scale_factor)
 
-        return [out]
+        return out # out is iterable already
 
 
 _scaled_masked_softmax_bwd_p = register_primitive(ScaledMaskedSoftmaxBwdPrimitive)
@@ -1955,7 +1957,7 @@ class ScaledUpperTriangMaskedSoftmaxBwdPrimitive(SoftmaxPrimitive):
             ScaledUpperTriangMaskedSoftmaxBwdPrimitive.name, ctx, grad_outputs, softmax_outputs,
             scale_factor)
 
-        return [out]
+        return out # out is iterable already
 
 _scaled_upper_triang_masked_softmax_bwd_p = \
     register_primitive(ScaledUpperTriangMaskedSoftmaxBwdPrimitive)
